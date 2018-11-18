@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Product;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
@@ -10,4 +11,15 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
+
+    public function __construct() {
+        $this->middleware('auth');
+        $this->middleware('role:CUSTOMER');
+    }
+
+    public function index() {
+        $products = Product::all()->take(9);
+
+        return view('cart', ['products' => $products]);
+    }
 }

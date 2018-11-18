@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Category;
+use App\Material;
 use Illuminate\Http\Request;
+use App\Product;
 
 class CustomerController extends Controller {
 
@@ -12,6 +15,19 @@ class CustomerController extends Controller {
     }
 
     public function index() {
-        return view('home');
+        $products = Product::all()->take(9);
+
+        return view('home', ['products' => $products]);
+    }
+
+    public function category($id) {
+        $products = Product::all()->where('category_id', '=', $id);
+        $materials = Material::all();
+        return view('category', ['products' => $products, 'materials' => $materials]);
+    }
+
+    public function product($id) {
+        $product = Product::find($id);
+        return view('product', ['product' => $product]);
     }
 }

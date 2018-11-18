@@ -12,10 +12,8 @@
 */
 
 Route::get('/', 'CustomerController@index');
-
-Route::get('/test', function () {
-    return view('layouts.index');
-});
+Route::get('/category/{id}', 'CustomerController@category');
+Route::get('/product/{id}', 'CustomerController@product');
 
 Auth::routes();
 

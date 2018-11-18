@@ -30,4 +30,6 @@
             </a>
         </div>
     </div>
+    @component('components.products', ['products' => $products])
+    @endcomponent
 @endsection

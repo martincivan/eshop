@@ -11,7 +11,7 @@
 </head>
 <body class="container-fluid">
 <header class="navbar navbar-dark bg-secondary">
-    <a href="index.html"><img class="navbar-brand" alt="logo" id="logo" src="{{ asset('img/logo-ricom-energy.png') }}"></a>
+    <a href="{{ url('/') }}"><img class="navbar-brand" alt="logo" id="logo" src="{{ asset('img/logo-ricom-energy.png') }}"></a>
     <div id="login-formular" class="mt-md-0" >
         @auth
             @component("auth.logout_button")
