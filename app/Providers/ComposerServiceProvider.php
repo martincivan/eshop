@@ -14,6 +14,7 @@ class ComposerServiceProvider extends ServiceProvider {
      */
     public function boot() {
         View::composer('components.categories', 'App\Http\ViewComposers\CategoriesComposer');
+        View::composer('layouts.index', 'App\Http\ViewComposers\CartComposer');
     }
 
     /**

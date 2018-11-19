@@ -32,7 +32,7 @@
         @component("components.categories")
         @endcomponent
     </div>
-    <a class="btn btn-outline-light" href="kosik.html" role="button" >Košík</a>
+    <a class="btn btn-outline-light" href="{{ url('cart') }}" role="button" >Košík({{ $numberInCart }})</a>
 </nav>
     @yield("filter")
 </div>

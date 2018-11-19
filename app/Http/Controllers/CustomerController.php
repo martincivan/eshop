@@ -2,14 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Category;
 use App\Material;
-use Illuminate\Http\Request;
 use App\Product;
 
 class CustomerController extends Controller {
 
     public function __construct() {
+        parent::__construct();
         $this->middleware('auth');
         $this->middleware('role:CUSTOMER');
     }
@@ -30,4 +29,5 @@ class CustomerController extends Controller {
         $product = Product::find($id);
         return view('product', ['product' => $product]);
     }
+
 }

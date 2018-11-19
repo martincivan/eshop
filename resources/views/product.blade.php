@@ -6,9 +6,11 @@
             <div class="col-md-6">
                 <img src="{{ asset("img/products/$product->id.jpg") }}" alt="Obrazok produktu {{$product->id}}">
                 <p>Cena: {{ $product->price }}€</p>
-                <form class="form-inline" method="post">
+                <form class="form-inline" method="post" action="{{ url("cart_item") }}">
+                    @csrf
                     <label for="pocet" class="d-none d-sm-flex"> Pocet: </label>
-                    <input type="number" name="pocet" id="pocet" value="1">
+                    <input type="number" name="number" id="pocet" value="1">
+                    <input type="hidden" name="id" value="{{ $product->id }}">
                     <input type="submit" class="btn-dark" value="Kupit">
                 </form>
             </div>
