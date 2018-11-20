@@ -20,6 +20,7 @@ Route::get('/product/{id}', 'CustomerController@product');
 Route::get('/cart', 'CartController@index');
 
 Route::post('/cart_item', 'CartController@addItem');
+Route::put('/cart_item/{id}', 'CartController@changeItemNumber');
 Route::delete('/cart_item/{id}', 'CartController@removeItem');
 
 

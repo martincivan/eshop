@@ -9,7 +9,7 @@
                 <form class="form-inline" method="post" action="{{ url("cart_item") }}">
                     @csrf
                     <label for="pocet" class="d-none d-sm-flex"> Pocet: </label>
-                    <input type="number" name="number" id="pocet" value="1">
+                    <input type="number" name="number" id="pocet" value="1" min="1">
                     <input type="hidden" name="id" value="{{ $product->id }}">
                     <input type="submit" class="btn-dark" value="Kupit">
                 </form>
