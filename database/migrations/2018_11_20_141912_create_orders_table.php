@@ -22,7 +22,6 @@ class CreateOrdersTable extends Migration
             $table->string('bussiness_id');
             $table->string('city');
             $table->string('street');
-            $table->string('address');
             $table->string('zip');
             $table->timestamps();
         });
