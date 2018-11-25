@@ -9,4 +9,8 @@ class Product extends Model
     public function material() {
         return $this->belongsTo('App\Material');
     }
+
+    public function orders() {
+        return $this->belongsToMany('App\Order')->withPivot('number');
+    }
 }

@@ -23,6 +23,8 @@ Route::post('/cart_item', 'CartController@addItem');
 Route::put('/cart_item/{id}', 'CartController@changeItemNumber');
 Route::delete('/cart_item/{id}', 'CartController@removeItem');
 
+Route::get('/shipping', 'OrderController@shipping');
+
 
 Auth::routes();
 
