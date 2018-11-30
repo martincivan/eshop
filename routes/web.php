@@ -27,6 +27,8 @@ Route::post('/payment', 'OrderController@payment');
 Route::post('/order', 'OrderController@create');
 Route::get('/shipping', 'OrderController@shipping');
 
+//Route::get('/products/list/', 'ProductController@list');
+
 
 Auth::routes();
 
