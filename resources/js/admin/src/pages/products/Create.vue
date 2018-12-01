@@ -1,0 +1,103 @@
+<template>
+  <div class="q-my-xl">
+    <q-card>
+      <q-card-title>Create product</q-card-title>
+      <q-card-main>
+        {{produkt}}
+        <q-field :count="250">
+          <q-input float-label="Name" max-length="250" v-model="produkt.name" />
+        </q-field>
+        <q-field :count="5000">
+          <q-input
+            type="textarea"
+            float-label="Description"
+            :max-height="100"
+            rows="7"
+            v-model="produkt.description"
+          />
+        </q-field>
+        <q-field :count="250">
+          <q-input float-label="Code" max-length="250" v-model="produkt.code" />
+        </q-field>
+        <q-field :count="250">
+          <q-input float-label="Size" type="number" v-model="produkt.size"/>
+        </q-field>
+        <q-field :count="250">
+          <q-input float-label="Price" type="number" v-model="produkt.price"/>
+        </q-field>
+        <q-field :count="250">
+          <q-select float-label="Category" v-model="produkt.category_id" :options="categories" radio></q-select>
+        </q-field>
+        <q-field :count="250">
+          <q-select float-label="Material" v-model="produkt.material_id" :options="materials" radio></q-select>
+        </q-field>
+      </q-card-main>
+      <q-card-actions class="q-mt-md">
+        <div class="row justify-end full-width docs-btn">
+          <q-btn label="Cancel" flat to="/products/index"/>
+          <q-btn @click="send" label="Save" color="primary" />
+        </div>
+      </q-card-actions>
+    </q-card>
+  </div>
+</template>
+<script>
+import axios from 'axios'
+import { Notify } from 'quasar'
+
+export default {
+  data () {
+    return {
+      produkt: {'name': '', 'description': '', 'id': ''},
+      categories: [],
+      materials: []
+    }
+  },
+  created: function () {
+    this.loading = true
+    axios.get('/weby/eshop/public/api/categories/list').then(({ data }) => {
+      Object.values(data).forEach(this.parseCategories)
+    })
+      .catch(error => {
+        console.log(error)
+        this.loading = false
+      })
+    axios.get('/weby/eshop/public/api/materials/list').then(({ data }) => {
+      Object.values(data).forEach(this.parseMaterials)
+    })
+      .catch(error => {
+        console.log(error)
+        this.loading = false
+      })
+    this.loading = false
+  },
+  methods: {
+    send: function () {
+      axios.post('/weby/eshop/public/api/products', this.produkt).then(({ data }) => {
+        Notify.create('Hura!')
+      })
+    },
+    parseCategories: function (row) {
+      this.categories.push(
+        {
+          label: row.name,
+          value: row.id
+        }
+      )
+    },
+    parseMaterials: function (row) {
+      this.materials.push(
+        {
+          label: row.name,
+          value: row.id
+        }
+      )
+    }
+  }
+}
+</script>
+
+<style lang="stylus">
+  .docs-btn .q-btn
+    padding 15px 20px
+</style>
