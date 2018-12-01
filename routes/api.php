@@ -21,4 +21,12 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 //Route::post('/cart_item', 'CartController@addItem');
 //Route::delete('/cart_item/{id}', 'CartController@removeItem');
 
-Route::get('/products/list/', 'ProductController@list');
+Route::get('/products/list/{page}', 'ProductController@list');
+Route::get('/products/{id}', 'ProductController@show');
+Route::put('/products/{id}', 'ProductController@update');
+Route::delete('/products/{id}', 'ProductController@destroy');
+Route::post('/products/', 'ProductController@create');
+
+
+Route::get('/materials/list', 'MaterialController@list');
+Route::get('/categories/list', 'CategoryController@list');
