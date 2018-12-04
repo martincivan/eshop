@@ -56,6 +56,6 @@ class OrderController extends Controller {
         }
         $request->session()->remove('cart');
         $request->session()->remove('order');
-        return view('home', ['products' => $products]);
+        return view('home', ['products' => $products, 'notice' => 'Order successfully created']);
     }
 }

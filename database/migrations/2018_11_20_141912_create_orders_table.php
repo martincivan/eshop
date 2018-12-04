@@ -19,7 +19,7 @@ class CreateOrdersTable extends Migration
             $table->unsignedInteger('shipping_id');
             $table->unsignedInteger('payment_id');
             $table->string('name');
-            $table->string('bussiness_id');
+            $table->string('bussiness_id')->nullable();
             $table->string('city');
             $table->string('street');
             $table->string('zip');

@@ -9,12 +9,6 @@ use Illuminate\Http\Request;
 
 class CustomerController extends Controller {
 
-    public function __construct() {
-        parent::__construct();
-//        $this->middleware('auth');
-//        $this->middleware('role:CUSTOMER');
-    }
-
     public function index() {
         $products = Product::all()->take(9);
 

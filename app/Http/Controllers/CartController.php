@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 
 class CartController extends Controller {
 
@@ -19,7 +20,7 @@ class CartController extends Controller {
             $session[$request->get('id')] = $request->get('number');
         }
         $request->session()->put('cart', $session);
-        return back();
+        return Redirect::back()->with('notice', "Item successfully added.");
     }
 
     public function changeItemNumber(Request $request, $id) {

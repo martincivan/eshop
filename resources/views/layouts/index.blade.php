@@ -9,7 +9,7 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="{{ asset('css/styl.css') }}" type="text/css">
 </head>
-<body class="container-fluid">
+<body class="container-fluid bg-light">
 <header class="navbar navbar-dark bg-secondary">
     <a href="{{ url('/') }}"><img class="navbar-brand" alt="logo" id="logo" src="{{ asset('img/logo-ricom-energy.png') }}"></a>
     <div id="login-formular" class="mt-md-0" >
@@ -37,5 +37,21 @@
     @yield("filter")
 </div>
     @yield("content")
+
+@if(session()->has('notice'))
+    <div class="alert alert-success fixed-bottom" role="alert">
+        {{ session()->get('notice') }}
+    </div>
+@endif
+@if(isset($notice))
+    <div class="alert alert-success fixed-bottom" role="alert">
+        {{ $notice }}
+    </div>
+@endif
+@if(isset($error))
+    <div class="alert alert-danger fixed-bottom" role="alert">
+        {{ $error }}
+    </div>
+@endif
 </body>
 </html>

@@ -10,7 +10,7 @@
                      class="col-2 miniatura">
                 <label for="pocet1" class="col-3 col-form-label">{{ $item->name }}</label>
                 <span class="col-1 col-form-label">{{ $item->price }}€</span>
-                <input type="radio" name="payment_id" class="col-1" value="{{ $item->id }}">
+                <input type="radio" name="payment_id" class="col-1" value="{{ $item->id }}" required>
             </div>
         @endforeach
         <div class="float-right">
