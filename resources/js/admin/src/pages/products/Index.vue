@@ -1,5 +1,5 @@
 <template>
-  <div class="q-my-xl">
+  <div>
     <q-table
       :data="serverData"
       :columns="columns"
@@ -14,8 +14,8 @@
         <q-td key="name" :props="props">
           <span>{{ props.row.name }}</span>
         </q-td>
-        <q-td key="description" :props="props">
-          <span>{{ props.row.description }}</span>
+        <q-td key="description" :props="props" style="max-width: 250px;">
+{{ props.row.description }}
         </q-td>
         <q-td key="code" :props="props">
           <span>{{ props.row.code }}</span>
@@ -34,7 +34,7 @@
         </q-td>
         <q-td class="text-right">
           <q-btn round icon="edit" class="q-mr-xs" @click="$router.push('/products/' + props.row.id + '/edit')" />
-          <q-btn round icon="delete" @click="zmaz(props.row.id)" />
+          <q-btn round icon="delete" @click="destroy(props.row.id, props.row.name)" />
         </q-td>
       </q-tr>
     </q-table>
@@ -43,11 +43,12 @@
 
 <script>
 import axios from 'axios'
-import { Notify } from 'quasar'
+// import {Dialog, Notify} from 'quasar'
 export default {
   data () {
     return {
       columns: [
+        { name: 'img', label: 'Image', field: '', align: 'left' },
         { name: 'id', label: 'ID', field: 'id', sortable: true, align: 'left' },
         { name: 'name', label: 'Name', field: 'name', sortable: true, align: 'left' },
         { name: 'description', label: 'Description', field: 'description', align: 'left' },
@@ -104,10 +105,22 @@ export default {
           this.loading = false
         })
     },
-    zmaz (id) {
-      axios.delete('/weby/eshop/public/api/products/' + id).then(({ data }) => {
-        Notify.create('Hura')
-      })
+    destroy (id, name) {
+      this.$q.dialog({
+        title: 'Delete',
+        message: 'Are you sure to delete ' + name + '?',
+        color: 'primary',
+        ok: true,
+        cancel: true
+      }).then(() => {
+        axios.delete('/weby/eshop/public/api/products/' + id).then(({data}) => {
+          this.$q.notify({type: 'positive', timeout: 2000, message: 'The product has been deleted.'})
+          this.request({
+            pagination: this.serverPagination,
+            filter: this.filter
+          })
+        })
+      }).catch(() => {})
     }
   },
   mounted () {

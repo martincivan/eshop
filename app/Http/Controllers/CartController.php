@@ -24,7 +24,7 @@ class CartController extends Controller {
     }
 
     public function changeItemNumber(Request $request, $id) {
-        if ($request->session()->exists('cart')) {
+        if ($request->session()->exists('cart') && $request->get('number') > 0) {
             $session = $request->session()->get('cart');
             $session[$id] = $request->get('number');
             $request->session()->put('cart', $session);

@@ -44,7 +44,6 @@
 </template>
 <script>
 import axios from 'axios'
-import { Notify } from 'quasar'
 
 export default {
   data () {
@@ -70,7 +69,7 @@ export default {
         console.log(error)
         this.loading = false
       })
-    axios.get('/weby/eshop/public/api/products/4')
+    axios.get('/weby/eshop/public/api/products/' + this.$route.params.id)
       .then(({ data }) => {
         this.produkt = data
       })
@@ -82,8 +81,8 @@ export default {
   },
   methods: {
     send: function () {
-      axios.put('/weby/eshop/public/api/products/4', this.produkt).then(({ data }) => {
-        Notify.create('Hura!')
+      axios.put('/weby/eshop/public/api/products/' + this.$route.params.id, this.produkt).then(() => {
+        this.$q.notify({type: 'positive', timeout: 2000, message: 'The product has been saved.'})
       })
     },
     parseCategories: function (row) {
