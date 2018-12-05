@@ -5,6 +5,7 @@
       :columns="columns"
       row-key="id"
       title="List of products"
+      style="table-layout: fixed;"
     >
       <q-tr slot="body" slot-scope="props" :props="props">
         <img :src="'/weby/eshop/public/img/products/' + props.row.id + '.jpg'">
@@ -13,9 +14,6 @@
         </q-td>
         <q-td key="name" :props="props">
           <span>{{ props.row.name }}</span>
-        </q-td>
-        <q-td key="description" :props="props" style="max-width: 250px;">
-{{ props.row.description }}
         </q-td>
         <q-td key="code" :props="props">
           <span>{{ props.row.code }}</span>
@@ -30,7 +28,7 @@
           <span>{{ categories[props.row.category_id].name }}</span>
         </q-td>
         <q-td key="material" :props="props">
-          <span>{{ categories[props.row.material_id].name }}</span>
+          <span>{{ materials[props.row.material_id].name }}</span>
         </q-td>
         <q-td class="text-right">
           <q-btn round icon="edit" class="q-mr-xs" @click="$router.push('/products/' + props.row.id + '/edit')" />
@@ -51,7 +49,6 @@ export default {
         { name: 'img', label: 'Image', field: '', align: 'left' },
         { name: 'id', label: 'ID', field: 'id', sortable: true, align: 'left' },
         { name: 'name', label: 'Name', field: 'name', sortable: true, align: 'left' },
-        { name: 'description', label: 'Description', field: 'description', align: 'left' },
         { name: 'code', label: 'Code', field: 'code', sortable: true, align: 'left' },
         { name: 'size', label: 'Size', field: 'size', sortable: true, align: 'left' },
         { name: 'price', label: 'Price', field: 'price', sortable: true, align: 'left' },
@@ -68,7 +65,9 @@ export default {
         sortBy: 'name',
         descending: true
       },
-      serverData: []
+      serverData: [],
+      materials: [],
+      categories: []
     }
   },
   methods: {

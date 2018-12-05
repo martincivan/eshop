@@ -19,6 +19,18 @@ class CreatePaymentsTable extends Migration
             $table->float('price');
             $table->timestamps();
         });
+        DB::table('payments')->insert([
+            'name' => 'Hotovost',
+            'price' => 1.99
+        ]);
+        DB::table('payments')->insert([
+            'name' => 'Online',
+            'price' => 5.99
+        ]);
+        DB::table('payments')->insert([
+            'name' => 'Prevod',
+            'price' => 2.99
+        ]);
     }
 
     /**

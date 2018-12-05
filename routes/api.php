@@ -23,7 +23,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::get('/products/list/{page}', 'ProductController@list');
 Route::get('/products/{id}', 'ProductController@show');
-Route::put('/products/{id}', 'ProductController@update');
+Route::post('/products/{id}/_update', 'ProductController@update');
 Route::delete('/products/{id}', 'ProductController@destroy');
 Route::post('/products/', 'ProductController@create');
 

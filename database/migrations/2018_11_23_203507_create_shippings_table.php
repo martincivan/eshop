@@ -19,6 +19,18 @@ class CreateShippingsTable extends Migration
             $table->float('price');
             $table->timestamps();
         });
+        DB::table('shippings')->insert([
+            'name' => 'Osobne',
+            'price' => 0
+        ]);
+        DB::table('shippings')->insert([
+            'name' => 'Kurier',
+            'price' => 5.99
+        ]);
+        DB::table('shippings')->insert([
+            'name' => 'Posta',
+            'price' => 2.99
+        ]);
     }
 
     /**

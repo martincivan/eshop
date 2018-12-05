@@ -3,7 +3,6 @@
     <q-card>
       <q-card-title>Create product</q-card-title>
       <q-card-main>
-        {{produkt}}
         <q-field :count="250">
           <q-input float-label="Name" max-length="250" v-model="produkt.name" />
         </q-field>
@@ -31,6 +30,9 @@
         <q-field :count="250">
           <q-select float-label="Material" v-model="produkt.material_id" :options="materials" radio></q-select>
         </q-field>
+        <q-field>
+          <input type="file" id="image_input" name="image" ref="image" accept=".jpg" @change="handleImage">
+        </q-field>
       </q-card-main>
       <q-card-actions class="q-mt-md">
         <div class="row justify-end full-width docs-btn">
@@ -43,14 +45,14 @@
 </template>
 <script>
 import axios from 'axios'
-import { Notify } from 'quasar'
 
 export default {
   data () {
     return {
-      produkt: {'name': '', 'description': '', 'id': ''},
+      produkt: {},
       categories: [],
-      materials: []
+      materials: [],
+      image: null
     }
   },
   created: function () {
@@ -73,8 +75,14 @@ export default {
   },
   methods: {
     send: function () {
-      axios.post('/weby/eshop/public/api/products', this.produkt).then(({ data }) => {
-        Notify.create('Hura!')
+      let formData = new FormData()
+      for (let key in this.produkt) {
+        formData.append(key, this.produkt[key])
+      }
+      formData.append('image', this.image)
+      // axios.post('/weby/eshop/public/api/products', this.produkt).then(({ data }) => {
+      axios.post('/weby/eshop/public/api/products', formData).then(({ data }) => {
+        this.$q.notify({type: 'positive', timeout: 2000, message: 'The product has been saved.'})
       })
     },
     parseCategories: function (row) {
@@ -92,6 +100,9 @@ export default {
           value: row.id
         }
       )
+    },
+    handleImage: function () {
+      this.image = this.$refs.image.files[0]
     }
   }
 }

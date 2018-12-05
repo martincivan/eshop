@@ -5,18 +5,19 @@ namespace App\Http\Controllers;
 use App\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use PhpParser\Node\Arg;
+use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
-    public function destroy($id) {
+    public function destroy($id)
+    {
         $product = Product::find($id);
         $product->delete();
         response()->json(['success' => 'success'], 200);
     }
 
-    public function create(Request $request) {
-        $data = $request->json()->all();
+    public function create(Request $data)
+    {
         $product = new Product();
         $product->name = $data['name'];
         $product->description = $data['description'];
@@ -26,11 +27,14 @@ class ProductController extends Controller
         $product->material_id = $data['material_id'];
         $product->category_id = $data['category_id'];
         $product->save();
+        if ($data->hasFile('image')) {
+            $data->file('image')->storeAs('img/products', $product->id . '.jpg',['disk' => 'public']);;
+        }
         response()->json(['success' => 'success'], 200);
     }
 
-    public function update(Request $request, $id) {
-        $data = $request->json()->all();
+    public function update(Request $data, $id)
+    {
         $product = Product::find($id);
         $product->name = $data['name'];
         $product->description = $data['description'];
@@ -40,10 +44,14 @@ class ProductController extends Controller
         $product->material_id = $data['material_id'];
         $product->category_id = $data['category_id'];
         $product->save();
+        if ($data->hasFile('image')) {
+            $data->file('image')->storeAs('img/products', $product->id . '.jpg',['disk' => 'public']);;
+        }
         response()->json(['success' => 'success'], 200);
     }
 
-    public function list($page) {
+    public function list($page)
+    {
         // get rowsPerPage from query parameters (after ?), if not set => 5
         $rowsPerPage = request('rowsPerPage', 5);
 
@@ -79,7 +87,8 @@ class ProductController extends Controller
         return response()->json(['rows' => $products, 'rowsNumber' => $rowsNumber]);
     }
 
-    public function show($id) {
+    public function show($id)
+    {
         return Product::find($id)->toJson();
     }
 }
