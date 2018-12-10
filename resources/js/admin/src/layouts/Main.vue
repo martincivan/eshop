@@ -17,10 +17,6 @@
         <router-view class="c-container" />
       </div>
     </q-page-container>
-
-    <q-layout-footer>
-      <div class="text-center q-pa-md">Copyright (C) 2018, Homer Simpson</div>
-    </q-layout-footer>
   </q-layout>
 </template>
 <script>

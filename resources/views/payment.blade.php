@@ -1,7 +1,7 @@
 @extends('layouts.index')
 @section('content')
     <div class="container">
-        <h2>Doprava</h2>
+        <h2>Platba</h2>
         <form action="{{ url("order") }}" method="post">
             {{ csrf_field() }}
         @foreach($payments as $item)
