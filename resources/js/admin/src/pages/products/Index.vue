@@ -6,9 +6,11 @@
       row-key="id"
       title="List of products"
       style="table-layout: fixed;"
+      :pagination.sync="serverPagination"
+      @request="request"
     >
       <q-tr slot="body" slot-scope="props" :props="props">
-        <img :src="'/weby/eshop/public/img/products/' + props.row.id + '.jpg'">
+        <img :src="'/weby/eshop/public/img/products/' + props.row.id + '.jpg'" style="max-height: 3em; object-fit: contain;">
         <q-td key="id" :props="props">
           <span>{{ props.row.id }}</span>
         </q-td>
@@ -71,7 +73,6 @@ export default {
     }
   },
   methods: {
-
     request ({ pagination }) {
       this.loading = true
       axios.get('/weby/eshop/public/api/categories/list').then(({ data }) => {

@@ -20,10 +20,10 @@
           <q-input float-label="Code" max-length="250" v-model="produkt.code" />
         </q-field>
         <q-field :count="250">
-          <q-input float-label="Size" type="number" v-model="produkt.size"/>
+          <q-input float-label="Price" type="number" v-model="produkt.price"/>
         </q-field>
         <q-field :count="250">
-          <q-input float-label="Price" type="number" v-model="produkt.price"/>
+          <q-select float-label="Size" :options="sizes" v-model="produkt.size"/>
         </q-field>
         <q-field :count="250">
           <q-select float-label="Category" v-model="produkt.category_id" :options="categories" radio></q-select>
@@ -50,6 +50,13 @@ import axios from 'axios'
 export default {
   data () {
     return {
+      sizes: [
+        {label: '60', value: 60},
+        {label: '80', value: 80},
+        {label: '100', value: 100},
+        {label: '120', value: 120}
+
+      ],
       produkt: {},
       materials: [],
       categories: []

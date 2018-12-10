@@ -18,6 +18,26 @@ class CreateCategoriesTable extends Migration
             $table->string('name');
             $table->timestamps();
         });
+        DB::table('categories')->insert(
+            array(
+                'name' => 'Predĺženia'
+            )
+        );
+        DB::table('categories')->insert(
+            array(
+                'name' => 'Kolená'
+            )
+        );
+        DB::table('categories')->insert(
+            array(
+                'name' => 'T-kusy'
+            )
+        );
+        DB::table('categories')->insert(
+            array(
+                'name' => 'Príslušenstvo'
+            )
+        );
     }
 
     /**
